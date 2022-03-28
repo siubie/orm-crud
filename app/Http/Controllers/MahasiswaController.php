@@ -72,7 +72,8 @@ class MahasiswaController extends Controller
      */
     public function update(UpdateMahasiswaRequest $request, Mahasiswa $mahasiswa)
     {
-        //
+        $mahasiswa->update($request->validated());
+        return redirect()->route('mahasiswa.index')->with('success', 'Mahasiswa Berhasil Diperbarui!');
     }
 
     /**
