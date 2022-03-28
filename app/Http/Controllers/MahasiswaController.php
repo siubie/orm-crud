@@ -72,7 +72,7 @@ class MahasiswaController extends Controller
      */
     public function update(UpdateMahasiswaRequest $request, Mahasiswa $mahasiswa)
     {
-        //
+        
     }
 
     /**

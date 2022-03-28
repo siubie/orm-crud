@@ -13,7 +13,7 @@ class UpdateMahasiswaRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,10 @@ class UpdateMahasiswaRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'Nim' => 'required',
+            'Nama' => 'required',
+            'Kelas' => 'required',
+            'Jurusan' => 'required',
         ];
     }
 }
