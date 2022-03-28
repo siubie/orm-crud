@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+<a href="{{route('mahasiswa.create')}}" class="btn btn-primary mb-2">Input Mahasiswa</a>
 <table class="table table-dark table-hover">
     <thead>
         <th>No</th>
