@@ -46,10 +46,10 @@ class MahasiswaController extends Controller
     {
         //melakukan validasi data
         $request->validate([
-            'Nim' =>'required',
-            'Nama' =>'required',
-            'Kelas' =>'required',
-            'Jurusan' =>'required',
+            'nim' =>'required',
+            'nama' =>'required',
+            'kelas' =>'required',
+            'jurusan' =>'required',
         ]);
         //fungsi eloquent untuk menambah data
         Mahasiswa::create($request->all());
@@ -81,7 +81,7 @@ class MahasiswaController extends Controller
     public function edit(Mahasiswa $mahasiswa)
     {
         //menampilkan detail data dengan menemukan berdasarkan nama Mahasiswa untuk diedit
-        $Mahasiswa = DB::table('mahasiswa')->where('nim',$mahasiswa)->firs();;
+        $Mahasiswa = DB::table('mahasiswa')->where('nim',$mahasiswa)->first();;
         return view('mahasiswa.edit',compact('Mahasiswa'));
     }
 
@@ -96,10 +96,10 @@ class MahasiswaController extends Controller
     {
         //melakukan validasi data
         $request->validate([
-            'Nim'=>'required',
-            'Nama'=>'required',
-            'Kelas'=>'required',
-            'Jurusan'=>'required',
+            'nim'=>'required',
+            'nama'=>'required',
+            'kelas'=>'required',
+            'jurusan'=>'required',
         ]);
         //fungsi eloquent untuk mengupdate data inputan kita
         Mahasiswa::find($mahasiswa)->update($request->all());
