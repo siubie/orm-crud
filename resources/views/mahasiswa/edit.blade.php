@@ -21,5 +21,6 @@
     <input type="text" class="form-control" id="jurusan" name="jurusan" value="{{ $mahasiswa->jurusan }}">
   </div>
   <button type="submit" class="btn btn-primary">Submit</button>
+  <a href="{{ route('mahasiswa.index') }}" class="btn btn-secondary">Kembali</a>
 </form>
 @endsection
