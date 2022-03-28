@@ -37,7 +37,8 @@ class MahasiswaController extends Controller
      */
     public function store(StoreMahasiswaRequest $request)
     {
-        //
+        Mahasiswa::create($request->validated());
+        return redirect()->route('mahasiswa.index')->with('success', 'Mahasiswa Berhasil Ditambahkan!');
     }
 
     /**
