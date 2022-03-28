@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Mahasiswa;
 use App\Http\Requests\StoreMahasiswaRequest;
 use App\Http\Requests\UpdateMahasiswaRequest;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class MahasiswaController extends Controller
@@ -41,10 +42,10 @@ class MahasiswaController extends Controller
     public function store(StoreMahasiswaRequest $request)
     {
         $request->validate([
-            'Nim' => 'required',
-            'Nama' => 'required',
-            'Kelas' => 'required',
-            'Jurusan' => 'required',
+            'nim' => 'required',
+            'nama' => 'required',
+            'kelas' => 'required',
+            'jurusan' => 'required',
         ]);
 
         Mahasiswa::create($request->all());
@@ -58,9 +59,9 @@ class MahasiswaController extends Controller
      * @param  \App\Models\Mahasiswa  $mahasiswa
      * @return \Illuminate\Http\Response
      */
-    public function show(Mahasiswa $mahasiswa)
+    public function show($mahasiswa)
     {
-        $Mahasiswa = Mahasiswa::find($mahasiswa);
+        $Mahasiswa = Mahasiswa::where('id_mahasiswa', $mahasiswa)->first();
         return view('mahasiswa.detail', compact('Mahasiswa'));
     }
 
@@ -70,10 +71,10 @@ class MahasiswaController extends Controller
      * @param  \App\Models\Mahasiswa  $mahasiswa
      * @return \Illuminate\Http\Response
      */
-    public function edit(Mahasiswa $mahasiswa)
+    public function edit($mahasiswa)
     {
-        $Mahasiswa = Mahasiswa::find($mahasiswa);
-        return view('mahasiswa.detail', compact('Mahasiswa'));
+        $Mahasiswa = Mahasiswa::where('id_mahasiswa', $mahasiswa)->first();;
+        return view('mahasiswa.edit', compact('Mahasiswa'));
     }
 
     /**
@@ -83,16 +84,16 @@ class MahasiswaController extends Controller
      * @param  \App\Models\Mahasiswa  $mahasiswa
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateMahasiswaRequest $request, Mahasiswa $mahasiswa)
+    public function update(UpdateMahasiswaRequest $request, $mahasiswa)
     {
         $request->validate([
-            'Nim' => 'required',
-            'Nama' => 'required',
-            'Kelas' => 'required',
-            'Jurusan' => 'required',
+            'nim' => 'required',
+            'nama' => 'required',
+            'kelas' => 'required',
+            'jurusan' => 'required',
         ]);
 
-        Mahasiswa::find($mahasiswa)->update($request->all());
+        Mahasiswa::where('id_mahasiswa', $mahasiswa)->first()->update($request->all());
 
         return redirect()->route('mahasiswa.index')->with('success', 'Mahasiswa Berhasil Diupdate');
     }
@@ -103,9 +104,9 @@ class MahasiswaController extends Controller
      * @param  \App\Models\Mahasiswa  $mahasiswa
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Mahasiswa $mahasiswa)
+    public function destroy($mahasiswa)
     {
-        Mahasiswa::find($mahasiswa)->delete();
+        Mahasiswa::where('id_mahasiswa', $mahasiswa)->first()->delete();
         return redirect()->route('mahasiswa.index')->with('success', 'Mahasiswa Berhasil Dihapus');
     }
 }
