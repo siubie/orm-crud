@@ -49,7 +49,7 @@ class MahasiswaController extends Controller
      */
     public function show(Mahasiswa $mahasiswa)
     {
-        //
+        return view('mahasiswa.show', compact('mahasiswa'));
     }
 
     /**
