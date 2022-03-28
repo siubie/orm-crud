@@ -24,10 +24,10 @@ class UpdateMahasiswaRequest extends FormRequest
     public function rules()
     {
         return [
-            'nim' => ['required', 'numeric', 'max:10'],
-            'nama' => ['required', 'string', 'max:50'],
-            'kelas' => ['required', 'string', 'max:5'],
-            'jurusan' => ['required', 'string', 'max:35'],
+            'nim' => ['required', 'numeric'],
+            'nama' => ['required', 'string'],
+            'kelas' => ['required', 'string'],
+            'jurusan' => ['required', 'string'],
         ];
     }
 }
