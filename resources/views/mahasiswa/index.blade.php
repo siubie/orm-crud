@@ -9,6 +9,7 @@
         <th>Nama</th>
         <th>Kelas</th>
         <th>Jurusan</th>
+        <th>Action</th>
     </thead>
     <tbody>
         @foreach ($mahasiswa as $mhs)
@@ -18,6 +19,9 @@
             <td>{{ $mhs -> nama ?? '' }}</td>
             <td>{{ $mhs -> kelas ?? ''}}</td>
             <td>{{ $mhs -> jurusan ?? ''}}</td>
+            <td>
+                <a href="#" class="badge bg-primary"></a>
+            </td>
         </tr>
         @endforeach
 
