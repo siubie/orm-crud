@@ -1,86 +1,75 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use App\Models\Mahasiswa;
-use App\Http\Requests\StoreMahasiswaRequest;
-use App\Http\Requests\UpdateMahasiswaRequest;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class MahasiswaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+/**
+* Display a listing of the resource.
+**
+@return \Illuminate\Http\Response
+*/
+public function index()
     {
-        //
+        // Fungsi elaquent menampilkan data menggunakan pagination
+        $mahasiswas = Mahasiswa::all(); //Mengambil semua isi tabel
+        $posts = Mahasiswa::orderBy('Nim', 'desc')->paginate(6);
+        return view('mahasiswas.index', compact('mahasiswas'))
+            ->with('i', (request()->input('page', 1)-1)*5);
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreMahasiswaRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StoreMahasiswaRequest $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Mahasiswa  $mahasiswa
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Mahasiswa $mahasiswa)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Mahasiswa  $mahasiswa
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Mahasiswa $mahasiswa)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateMahasiswaRequest  $request
-     * @param  \App\Models\Mahasiswa  $mahasiswa
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateMahasiswaRequest $request, Mahasiswa $mahasiswa)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Mahasiswa  $mahasiswa
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Mahasiswa $mahasiswa)
-    {
-        //
-    }
+public function create()
+{
+return view('mahasiswa.create');
 }
+public function store(Request $request)
+{
+//melakukan validasi data
+$request->validate([
+'Nim' => 'required',
+'Nama' => 'required',
+'Kelas' => 'required',
+'Jurusan' => 'required',
+]);
+//fungsi eloquent untuk menambah data
+Mahasiswa::create($request->all());
+//jika data berhasil ditambahkan, akan kembali ke halaman utama
+return redirect()->route('mahasiswa.index')
+->with('success', 'Mahasiswa Berhasil Ditambahkan');
+}
+public function show($Nim)
+{
+//menampilkan detail data dengan menemukan/berdasarkan Nim Mahasiswa
+$Mahasiswa = Mahasiswa::find($Nim);
+return view('mahasiswa.detail', compact('Mahasiswa'));
+}
+public function edit($Nim)
+{
+//menampilkan detail data dengan menemukan berdasarkan Nim Mahasiswa untuk diedit
+$Mahasiswa = DB::table('mahasiswa')->where('nim', $Nim)->first();;
+return view('mahasiswa.edit', compact('Mahasiswa'));
+}
+public function update(Request $request, $Nim)
+{
+//melakukan validasi data
+$request->validate([
+'Nim' => 'required',
+'Nama' => 'required',
+'Kelas' => 'required',
+'Jurusan' => 'required',
+]);
+//fungsi eloquent untuk mengupdate data inputan kita
+Mahasiswa::find($Nim)->update($request->all());
+//jika data berhasil diupdate, akan kembali ke halaman utama
+return redirect()->route('mahasiswa.index')
+->with('success', 'Mahasiswa Berhasil Diupdate');
+}
+public function destroy( $Nim)
+{
+//fungsi eloquent untuk menghapus data
+Mahasiswa::find($Nim)->delete();
+return redirect()->route('mahasiswa.index')
+-> with('success', 'Mahasiswa Berhasil Dihapus');
+}
+};
