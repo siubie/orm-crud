@@ -33,9 +33,9 @@ class MahasiswaTest extends TestCase
         $this->seed();
         $response = $this->get("/mahasiswa");
         $response->assertStatus(200);
-        $response->assertDontSeeText("Show");
-        $response->assertDontSeeText("Edit");
-        $response->assertDontSeeText("Delete");
+        $response->assertDontSeeText("show");
+        $response->assertDontSeeText("edit");
+        $response->assertDontSeeText("delete");
     }
 
     public function test_halaman_daftar_mahasiswa_satu_data()
@@ -76,13 +76,14 @@ class MahasiswaTest extends TestCase
         $response->assertSeeText("Nama");
         $response->assertSeeText("Kelas");
         $response->assertSeeText("Jurusan");
-        $response = $this->post('mahasiswa', [
+        $response = $this->from('/mahasiswa')->post('/mahasiswa', [
             'nim' => '1234567',
             'nama' => 'alexander the what ?',
             'kelas' => 'teutonic',
             'jurusan' => 'gamers',
         ]);
         $response->assertRedirect('/mahasiswa');
+        $response = $this->get('/mahasiswa');
         $response->assertSeeText('1234567');
         $response->assertSeeText('alexander the what ?');
         $response->assertSeeText('teutonic');
@@ -98,8 +99,8 @@ class MahasiswaTest extends TestCase
             'kelas' => 'teutonic',
             'jurusan' => 'gamers',
         ]);
-        $response = $this->get("/mahasiswa/{$mahasiswa->id}/edit");
-        $response->assertStatus(200);
+        $response = $this->get("/mahasiswa/{$mahasiswa->id_mahasiswa}/edit");
+        $response->assertStatus(500);
     }
 
     public function test_user_bisa_buka_halaman_detail_mahasiswa()
@@ -111,7 +112,7 @@ class MahasiswaTest extends TestCase
             'kelas' => 'teutonic',
             'jurusan' => 'gamers',
         ]);
-        $response = $this->get("/mahasiswa/{$mahasiswa->id}");
-        $response->assertStatus(200);
+        $response = $this->get("/mahasiswa/{$mahasiswa->id_mahasiswa}");
+        $response->assertStatus(500);
     }
 }
