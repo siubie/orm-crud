@@ -112,7 +112,7 @@ class MahasiswaTest extends TestCase
             'kelas' => 'teutonic',
             'jurusan' => 'gamers',
         ]);
-        $response = $this->get("/mahasiswa/{$mahasiswa->id}");
+        $response = $this->get("/mahasiswa/{$mahasiswa->id_mahasiswa}");
         $response->assertStatus(200);
     }
 }
