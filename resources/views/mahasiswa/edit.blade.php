@@ -1,5 +1,7 @@
 @extends('mahasiswa.layout')
+
 @section('content')
+
 <div class="container mt-5">
     <div class="row justify-content-center align-items-center">
         <div class="card" style="width: 24rem;">
@@ -21,29 +23,25 @@
         @csrf
         @method('PUT')
         <div class="form-group">
-        <label for="Nim">Nim</label>
-        <input type="text" name="Nim" class="form-control" id="Nim" value="{{ $Mahasiswa-
-        >nim }}" aria-describedby="Nim" >
+        <label for="nim">Nim</label>
+        <input type="text" name="nim" class="form-control" id="nim" value="{{ $Mahasiswa->nim }}" aria-describedby="nim" >
         </div>
         <div class="form-group">
-        <label for="Nama">Nama</label>
-        <input type="text" name="Nama" class="form-control" id="Nama" value="{{ $Mahasiswa-
-        >nama }}" aria-describedby="Nama" >
+        <label for="nama">Nama</label>
+        <input type="text" name="nama" class="form-control" id="nama" value="{{ $Mahasiswa->nama }}" aria-describedby="nama" >
         </div>
         <div class="form-group">
-        <label for="Kelas">Kelas</label>
-        <input type="Kelas" name="Kelas" class="form-control" id="Kelas" value="{{ $Mahasiswa-
-        >kelas }}" aria-describedby="Kelas" >
+        <label for="kelas">Kelas</label>
+        <input type="text" name="kelas" class="form-control" id="kelas" value="{{ $Mahasiswa->kelas }}" aria-describedby="kelas" >
         </div>
         <div class="form-group">
-        <label for="Jurusan">Jurusan</label>
-        <input type="Jurusan" name="Jurusan" class="form-control" id="Jurusan" value="{{ $Mahasiswa-
-        >jurusan }}" aria-describedby="Jurusan" >
+        <label for="jurusan">Jurusan</label>
+        <input type="text" name="jurusan" class="form-control" id="jurusan" value="{{ $Mahasiswa->jurusan }}" aria-describedby="jurusan" >
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
         </form>
         </div>
         </div>
         </div>
-        </div>
-        @endsection
+       </div>
+       @endsection
