@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('mahasiswa.layout')
 @section('content')
 <div class="container mt-5"><div class="row justify-content-center align-items-center">
 <div class="card" style="width: 24rem;">
@@ -16,7 +16,7 @@ Edit Mahasiswa
 </ul>
 </div>
 @endif
-<form method="post" action="{{ route('update', $Mahasiswa->nim) }}" id="myForm">
+<form method="post" action="{{ route('mahasiswa.update', $Mahasiswa->nim) }}" id="myForm">
 @csrf
 @method('PUT')
 <div class="form-group">

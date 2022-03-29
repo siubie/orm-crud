@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('mahasiswa.layout')
 @section('content')
 <div class="container mt-5">
 <div class="row justify-content-center align-items-center">
@@ -16,7 +16,7 @@
 </ul>
 </div>
 @endif
-<form method="post" action="{{ route('store') }}" id="myForm">
+<form method="post" action="{{ route('mahasiswa.store') }}" id="myForm">
 @csrf
 <div class="form-group">
 <label for="Nim">Nim</label>
