@@ -13,6 +13,7 @@
                     <li class="list-group-item"><b>Nama: </b>{{$mahasiswa->nama}}</li>
                     <li class="list-group-item"><b>Kelas: </b>{{$mahasiswa->kelas}}</li>
                     <li class="list-group-item"><b>Jurusan: </b>{{$mahasiswa->jurusan}}</li>
+
                 </ul>
             </div>
             <a class="btn btn-success mt-3" href="{{ route('mahasiswa.index') }}">Kembali</a>

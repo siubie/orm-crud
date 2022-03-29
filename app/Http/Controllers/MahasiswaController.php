@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Mahasiswa;
 use App\Http\Requests\StoreMahasiswaRequest;
 use App\Http\Requests\UpdateMahasiswaRequest;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class MahasiswaController extends Controller
@@ -14,13 +15,15 @@ class MahasiswaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
         $mahasiswa = $mahasiswa = DB::table('mahasiswa')->get();
-        $post = Mahasiswa::orderBy('id_mahasiswa','desc')->paginate(6);
-        return view('mahasiswa.index',compact('mahasiswa'))
-        ->with('i',(request()->input('page',1)-1)*5);
+        $post = Mahasiswa::when($request->nama, function($query, $nama){
+            return $query->where('nama', 'like', '%'.$nama .'%');
+        })-> orderBy('id_mahasiswa','desc')->paginate(3);
+        return view('mahasiswa.index',compact('mahasiswa','post'))
+        ->with('i',(request()->input('page',1)-1)*3);
     }
 
     /**
@@ -48,6 +51,9 @@ class MahasiswaController extends Controller
             'nama' => 'required',
             'kelas' => 'required',
             'jurusan' => 'required',
+            'email' => 'required',
+            'alamat' => 'required',
+            'tanggal_lahir' => 'required',
         ]);
 
         Mahasiswa::create($request->all());
@@ -96,6 +102,9 @@ class MahasiswaController extends Controller
             'nama' => 'required',
             'kelas' => 'required',
             'jurusan' => 'required',
+            'email' => 'required',
+            'alamat' => 'required',
+            'tanggal_lahir' => 'required',
         ]);
 
         Mahasiswa::find($mahasiswa->id_mahasiswa)->update($request->all());
