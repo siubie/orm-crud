@@ -25,7 +25,7 @@
                 <a href="#"
                 class="badge bg-danger"
                 onclick="event.preventDefault(); document.getElementById('form-destroy-{{ $mhs->id_mahasiswa }}').submit()">Delete</a>
-                <form action="{{ route('mahasiswa.delete', $mhs -> id_mahasiswa) }}" method="post">
+                <form action="{{ route('mahasiswa.destroy', $mhs -> id_mahasiswa) }}" method="post" id="form-destroy-{{ $mhs->id_mahasiswa }}">
                     @csrf
                     @method('DELETE')
                 </form>
