@@ -35,9 +35,9 @@
             <td>{{$mhs->jurusan}}</td>
 
             <td>
-                <form action="{{route('mahasiswa.destroy', ['mahasiswa' => $mhs->id_mahasiswa])}}" method="POST">
-                    <a class="btn btn-info" href="{{route('mahasiswa.show', $mhs->id_mahasiswa)}}">Show</a>
-                    <a class="btn btn-primary" href="{{route('mahasiswa.edit', $mhs->id_mahasiswa)}}">Edit</a>
+                <form action="{{route('mahasiswa.destroy', ['mahasiswa' => $mhs->id])}}" method="POST">
+                    <a class="btn btn-info" href="{{route('mahasiswa.show', $mhs->id)}}">Show</a>
+                    <a class="btn btn-primary" href="{{route('mahasiswa.edit', $mhs->id)}}">Edit</a>
 
                     @csrf
                     @method('DELETE')

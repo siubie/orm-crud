@@ -19,7 +19,7 @@
                             </ul>
                         </div>
                     @endif
-                    <form method="POST" action="{{ route('mahasiswa.update', $mahasiswa->id_mahasiswa) }}">
+                    <form method="POST" action="{{ route('mahasiswa.update', $mahasiswa->id) }}">
                         @csrf
                         @method('PUT')
                         <div class="form-group">
