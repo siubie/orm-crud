@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+<h3>Tambah Mahasiswa</h3>
 <form action="{{ route('mahasiswa.store')}}" method="post">
     @csrf
     <div class="mb-3">
