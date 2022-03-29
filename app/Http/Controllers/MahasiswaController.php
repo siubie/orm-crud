@@ -45,10 +45,10 @@ class MahasiswaController extends Controller
     {
         // Melakukan validasi data
         $request->validate([
-            'Nim' => 'required',
-            'Nama' => 'required',
-            'Kelas' => 'required',
-            'Jurusan' => 'required',
+            'nim' => 'required',
+            'nama' => 'required',
+            'kelas' => 'required',
+            'jurusan' => 'required',
         ]);
 
         // Fungsi eloquent untuk menambah data
@@ -65,10 +65,10 @@ class MahasiswaController extends Controller
      * @param  \App\Models\Mahasiswa  $mahasiswa
      * @return \Illuminate\Http\Response
      */
-    public function show(Mahasiswa $mahasiswa)
+    public function show(Mahasiswa $Nim)
     {
         // Menampilkan detail data dengan menemukan/berdasarkan Nim Mahasiswa
-        $Mahasiswa = Mahasiswa::find($mahasiswa);
+        $Mahasiswa = Mahasiswa::find($Nim);
         return view('mahasiswa.detail', compact('Mahasiswa'));
     }
 
@@ -81,7 +81,7 @@ class MahasiswaController extends Controller
     public function edit(Mahasiswa $mahasiswa)
     {
         // Menampilkan detail data dengan menemukan berdasarkan Nim Mahasiswa untuk diedit
-        $Mahasiswa = DB::table('mahasiswa')->where('id_mahasiswa', $mahasiswa->id_mahasiswa)->first();;
+        $Mahasiswa = DB::table('mahasiswa')->where('id_mahasiswa', $mahasiswa->id_mahasiswa)->first();
         return view('mahasiswa.edit', compact('Mahasiswa'));
     }
 
@@ -96,10 +96,10 @@ class MahasiswaController extends Controller
     {
         // Melakukan validasi data
         $request->validate([
-            'Nim' => 'required',
-            'Nama' => 'required',
-            'Kelas' => 'required',
-            'Jurusan' => 'required',
+            'nim' => 'required',
+            'nama' => 'required',
+            'kelas' => 'required',
+            'jurusan' => 'required',
         ]);
 
         // Fungsi eloquent untuk mengupdate data inputan kita
@@ -119,8 +119,8 @@ class MahasiswaController extends Controller
     public function destroy(Mahasiswa $mahasiswa)
     {
         // Fungsi eloquent untuk menghapus data
-        Mahasiswa::find($mahasiswa)->delete();
+        Mahasiswa::find($mahasiswa->id_mahasiswa)->delete();
         return redirect()->route('mahasiswa.index')
-        -> with('success', 'Mahasiswa Berhasil Dihapus');
+        ->with('success', 'Mahasiswa Berhasil Dihapus');
     }
 }
