@@ -51,9 +51,9 @@ class MahasiswaController extends Controller
             'nama' => 'required',
             'kelas' => 'required',
             'jurusan' => 'required',
-            'email' => 'required',
-            'alamat' => 'required',
-            'tanggal_lahir' => 'required',
+            // 'email' => 'required',
+            // 'alamat' => 'required',
+            // 'tanggal_lahir' => 'required',
         ]);
 
         Mahasiswa::create($request->all());
@@ -102,9 +102,9 @@ class MahasiswaController extends Controller
             'nama' => 'required',
             'kelas' => 'required',
             'jurusan' => 'required',
-            'email' => 'required',
-            'alamat' => 'required',
-            'tanggal_lahir' => 'required',
+            // 'email' => 'required',
+            // 'alamat' => 'required',
+            // 'tanggal_lahir' => 'required',
         ]);
 
         Mahasiswa::find($mahasiswa->id_mahasiswa)->update($request->all());

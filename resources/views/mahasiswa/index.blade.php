@@ -39,14 +39,16 @@
         <th>Tanggal Lahir</th>
         <th width="280px">Action</th>
     </tr>
-    @foreach ($post as $mhs)
+    @foreach ($mahasiswa as $mhs)
     <tr >
 
         <td>{{ $mhs ->nim }}</td>
         <td>{{ $mhs ->nama }}</td>
         <td>{{ $mhs ->kelas }}</td>
         <td>{{ $mhs ->jurusan }}</td>
-
+        {{-- <td>{{ $mhs ->email }}</td>
+        <td>{{ $mhs ->alamat }}</td>
+        <td>{{ $mhs ->tanggal_lahir }}</td> --}}
         <td>
         <form action="{{ route('mahasiswa.destroy',$mhs->id_mahasiswa) }}" method="POST">
 
@@ -61,5 +63,5 @@
     </tr>
     @endforeach
 </table>
-{{$post->links()}}
+{{-- {{$post->links()}} --}}
 @endsection
