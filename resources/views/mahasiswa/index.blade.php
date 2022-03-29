@@ -14,12 +14,12 @@
             <a class="btn btn-success" href="{{ route('mahasiswa.create') }}"> Input Mahasiswa</a>
         </div>
     </div>
-    <div class="col-lg-10">
+    {{-- <div class="col-lg-10">
         <form class="form-inline mt-4 mb-2 " action="" method="get">
             <input class="form-control" type="text" placeholder="Nama" name="nama" aria-label="nama" style="width: 92%">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
           </form>
-    </div>
+    </div> --}}
 </div>
 
 @if ($message = Session::get('success'))
@@ -34,9 +34,9 @@
         <th>Nama</th>
         <th>Kelas</th>
         <th>Jurusan</th>
-        <th>Email</th>
+        {{-- <th>Email</th>
         <th>Alamat</th>
-        <th>Tanggal Lahir</th>
+        <th>Tanggal Lahir</th> --}}
         <th width="280px">Action</th>
     </tr>
     @foreach ($mahasiswa as $mhs)
