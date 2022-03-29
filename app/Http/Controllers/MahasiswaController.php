@@ -15,7 +15,8 @@ class MahasiswaController extends Controller
      */
     public function index()
     {
-        //
+        $mahasiswa= Mahasiswa::all();
+        return view('mahasiswa.index',compact('mahasiswa'));
     }
 
     /**
@@ -25,7 +26,7 @@ class MahasiswaController extends Controller
      */
     public function create()
     {
-        //
+        return view('mahasiswa.create');
     }
 
     /**
@@ -36,7 +37,8 @@ class MahasiswaController extends Controller
      */
     public function store(StoreMahasiswaRequest $request)
     {
-        //
+        Mahasiswa::create($request -> validated());
+        return redirect()->route('mahasiswa.index') ->with('succes', 'Mahasiswa Berhasil Ditambahkan');
     }
 
     /**
@@ -47,7 +49,7 @@ class MahasiswaController extends Controller
      */
     public function show(Mahasiswa $mahasiswa)
     {
-        //
+        return view('mahasiswa.detail', compact('mahasiswa'));
     }
 
     /**
@@ -58,7 +60,7 @@ class MahasiswaController extends Controller
      */
     public function edit(Mahasiswa $mahasiswa)
     {
-        //
+        return view('mahasiswa.edit', compact('mahasiswa'));
     }
 
     /**
@@ -70,7 +72,10 @@ class MahasiswaController extends Controller
      */
     public function update(UpdateMahasiswaRequest $request, Mahasiswa $mahasiswa)
     {
-        //
+        $mahasiswa -> update($request->validated());
+        return redirect()->route('mahasiswa.index')
+        ->with('success', 'Mahasiswa Berhasil Diupdate');
+
     }
 
     /**
@@ -81,6 +86,9 @@ class MahasiswaController extends Controller
      */
     public function destroy(Mahasiswa $mahasiswa)
     {
-        //
+        $mahasiswa->delete();
+        return redirect()->route('mahasiswa.index')
+        -> with('success', 'Mahasiswa Berhasil Dihapus');
+
     }
 }
