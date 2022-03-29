@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 use App\Models\Mahasiswa;
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreMahasiswaRequest;
+use App\Http\Requests\UpdateMahasiswaRequest;
 use Illuminate\Support\Facades\DB;
 class MahasiswaController extends Controller
 {
@@ -26,20 +28,16 @@ class MahasiswaController extends Controller
     public function store(Request $request)
     {
         //melakukan validasi data
-        $validasi = $request->validate([
+        $mahasiswa = $request->validate([
             'nim' => 'required',
             'nama' => 'required',
             'kelas' => 'required',
             'jurusan' => 'required',
-            'email' => 'required|email',
-            'alamat' => 'required',
-            'tanggal_lahir' => 'required',
-
         ]);
 
-
         //fungsi eloquent untuk menambah data
-        Mahasiswa::create($request->all());
+        $store =  Mahasiswa::create($mahasiswa);
+        
 
         //jika data berhasil ditambahkan, akan kembali ke halaman utama
         return redirect()->route('mahasiswa.index')
@@ -66,10 +64,6 @@ class MahasiswaController extends Controller
             'nama' => 'required',
             'kelas' => 'required',
             'jurusan' => 'required',
-            'email' => 'required|email',
-            'alamat' => 'required',
-            'tanggal_lahir' => 'required',
-
         ]);
 
         //fungsi eloquent untuk mengupdate data inputan kita

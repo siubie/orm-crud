@@ -19,8 +19,5 @@ protected $fillable = [
 'nama',
 'kelas',
 'jurusan',
-'email',
-'alamat',
-'tanggal_lahir',
 ];
 };
