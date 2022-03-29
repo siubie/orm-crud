@@ -1,10 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
+<h5>Tambah Mahasiswa</h5>
 <form action="{{ route('mahasiswa.store') }}" method="post">
   @csrf
   <div class="mb-3">
-    <label for="nim" class="form-label">NIM</label>
+    <label for="nim" class="form-label">Nim</label>
     <input type="number" class="form-control" id="nim" name="nim">
   </div>
   <div class="mb-3">
