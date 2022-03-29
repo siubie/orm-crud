@@ -46,10 +46,10 @@ class MahasiswaController extends Controller
         //
         //melakukan validasi data
             $request->validate([
-            'Nim' => 'required',
-            'Nama' => 'required',
+            'nim' => 'required',
+            'nama' => 'required',
             'Kelas' => 'required',
-            'Jurusan' => 'required',
+            'jurusan' => 'required',
             ]);
             //fungsi eloquent untuk menambah data
             Mahasiswa::create($request->all());
