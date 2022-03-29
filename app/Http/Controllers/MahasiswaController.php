@@ -1,86 +1,87 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Models\Mahasiswa;
-use App\Http\Requests\StoreMahasiswaRequest;
-use App\Http\Requests\UpdateMahasiswaRequest;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class MahasiswaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
+ /**
+ * Display a listing of the resource.
+ *
+ * @return \Illuminate\Http\Response
+ */
+ public function index()
+ {
+ //fungsi eloquent menampilkan data menggunakan pagination
+ $mahasiswa = $mahasiswa = DB::table('mahasiswa')->get(); // Mengambil semua isi tabel
+ $posts = Mahasiswa::orderBy('Nim', 'desc')->paginate(6);
+ return view('mahasiswa.index', compact('mahasiswa'))
+ ->with('i', (request()->input('page', 1) - 1) * 5);
+ }
+ public function create()
+ {
+ return view('mahasiswa.create');
+ }
+ public function store(Request $request)
+ {
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
+ //melakukan validasi data
+ $request->validate([
+ 'nim' => 'required',
+ 'nama' => 'required',
+ 'kelas' => 'required',
+ 'jurusan' => 'required',
+ ]);
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreMahasiswaRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StoreMahasiswaRequest $request)
-    {
-        //
-    }
+ //fungsi eloquent untuk menambah data
+ Mahasiswa::create($request->all());
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Mahasiswa  $mahasiswa
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Mahasiswa $mahasiswa)
-    {
-        //
-    }
+//jika data berhasil ditambahkan, akan kembali ke halaman utama
+ return redirect()->route('mahasiswa.index')
+ ->with('success', 'Mahasiswa Berhasil Ditambahkan');
+ }
+ public function show(Mahasiswa $mahasiswa)
+ {
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Mahasiswa  $mahasiswa
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Mahasiswa $mahasiswa)
-    {
-        //
-    }
+ //menampilkan detail data dengan menemukan/berdasarkan Nim Mahasiswa
+//  $Mahasiswa = DB::table('mahasiswa')->where('nim', $Nim)->first();
+$Mahasiswa = $mahasiswa;
+ return view('mahasiswa.detail', compact('Mahasiswa'));
+ }
+ public function edit(Mahasiswa $mahasiswa)
+ {
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateMahasiswaRequest  $request
-     * @param  \App\Models\Mahasiswa  $mahasiswa
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateMahasiswaRequest $request, Mahasiswa $mahasiswa)
-    {
-        //
-    }
+//menampilkan detail data dengan menemukan berdasarkan Nim Mahasiswa untuk diedit
+//  $Mahasiswa = DB::table('mahasiswa')->where('nim', $Nim)->first();
+$Mahasiswa = $mahasiswa;
+ return view('mahasiswa.edit', compact('Mahasiswa'));
+ }
+ public function update(Request $request, $Nim)
+ {
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Mahasiswa  $mahasiswa
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Mahasiswa $mahasiswa)
-    {
-        //
-    }
-}
+//melakukan validasi data
+ $request->validate([
+ 'nim' => 'required',
+ 'nama' => 'required',
+ 'kelas' => 'required',
+ 'jurusan' => 'required',
+ ]);
+
+//fungsi eloquent untuk mengupdate data inputan kita
+Mahasiswa::where('nim',$Nim)->update();
+
+//jika data berhasil diupdate, akan kembali ke halaman utama
+ return redirect()->route('mahasiswa.index')
+ ->with('success', 'Mahasiswa Berhasil Diupdate');
+ }
+ public function destroy( $Nim)
+ {
+
+//fungsi eloquent untuk menghapus data
+$Mahasiswa = DB::table('mahasiswa')->where('nim', $Nim)->first();
+ return redirect()->route('mahasiswa.index')
+ -> with('success', 'Mahasiswa Berhasil Dihapus');
+ }
+};
