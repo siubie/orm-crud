@@ -19,4 +19,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('/mahasiswa', MahasiswaController::class);
+Route::resource('/mahasiswa', MahasiswaController::class)->parameters([
+    'mahasiswa' => 'id_mahasiswa'
+]);
