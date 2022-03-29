@@ -44,10 +44,10 @@ class MahasiswaController extends Controller
     {
         //
         $request->validate([
-            'Nim' => 'required',
-            'Nama' => 'required',
-            'Kelas' => 'required',
-            'Jurusan' => 'required',
+            'nim' => 'required',
+            'nama' => 'required',
+            'kelas' => 'required',
+            'jurusan' => 'required',
         ]);
 
         Mahasiswa::create($request->all());
@@ -63,8 +63,9 @@ class MahasiswaController extends Controller
     public function show(Mahasiswa $mahasiswa)
     {
         //
-        $Mahasiswa = Mahasiswa::find($mahasiswa);
-        return view('mahasiswa.detail',compact('Mahasiswa'));
+        // $Mahasiswa = $mahasiswa;
+        // $Mahasiswa = Mahasiswa::find($mahasiswa->id_mahasiswa);
+        return view('mahasiswa.detail',compact('mahasiswa'));
     }
 
     /**
@@ -76,7 +77,7 @@ class MahasiswaController extends Controller
     public function edit(Mahasiswa $mahasiswa)
     {
         //
-        $Mahasiswa = DB::table('mahasiswa')->where('id_mahasiswa',$mahasiswa)->first();
+        $Mahasiswa = DB::table('mahasiswa')->where('id_mahasiswa',$mahasiswa->id_mahasiswa)->first();
         return view('mahasiswa.edit',compact('Mahasiswa'));
     }
 
@@ -91,13 +92,13 @@ class MahasiswaController extends Controller
     {
         //
         $request->validate([
-            'Nim' => 'required',
-            'Nama' => 'required',
-            'Kelas' => 'required',
-            'Jurusan' => 'required',
+            'nim' => 'required',
+            'nama' => 'required',
+            'kelas' => 'required',
+            'jurusan' => 'required',
         ]);
 
-        Mahasiswa::find($mahasiswa)->update($request->all());
+        Mahasiswa::find($mahasiswa->id_mahasiswa)->update($request->all());
 
         return redirect()->route('mahasiswa.index')
         ->with('success','Mahasiswa Berhasil Diupdate');
@@ -112,7 +113,7 @@ class MahasiswaController extends Controller
     public function destroy(Mahasiswa $mahasiswa)
     {
         //
-        Mahasiswa::find($mahasiswa)->delete();
+        Mahasiswa::find($mahasiswa->id_mahasiswa)->delete();
         return redirect()->route('mahasiswa.index')
         ->with('success','Mahasiswa Berhasil Dihapus');
     }
