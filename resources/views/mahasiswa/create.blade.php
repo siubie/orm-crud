@@ -22,25 +22,25 @@
                 @csrf
                     <div class="form-group">
                         <label for="Nim">Nim</label>
-                        <input type="text" name="Nim" class="form-control" id="Nim" aria-describedby="Nim" >
+                        <input type="text" name="nim" class="form-control" id="nim" aria-describedby="nim" >
                     </div>
                     <div class="form-group">
                         <label for="Nama">Nama</label>
-                        <input type="Nama" name="Nama" class="form-control" id="Nama" ariadescribedby="Nama" >
+                        <input type="nama" name="nama" class="form-control" id="nama" aria-describedby="nama" >
                     </div>
                     <div class="form-group">
                         <label for="Kelas">Kelas</label>
-                        <input type="Kelas" name="Kelas" class="form-control" id="Kelas" ariadescribedby="password" >
+                        <input type="kelas" name="kelas" class="form-control" id="kelas" aria-describedby="kelas" >
                     </div>
                     <div class="form-group">
                         <label for="Jurusan">Jurusan</label>
-                        <input type="Jurusan" name="Jurusan" class="form-control" id="Jurusan" ariadescribedby="Jurusan" >
+                        <input type="jurusan" name="jurusan" class="form-control" id="jurusan" aria-describedby="jurusan" >
                     </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
             </div>
         </div>
     </div>
-    
+
 </div>
 @endsection
