@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Mahasiswa;
 use App\Http\Requests\StoreMahasiswaRequest;
 use App\Http\Requests\UpdateMahasiswaRequest;
+use Illuminate\Support\Facades\DB;
+
 
 class MahasiswaController extends Controller
 {
@@ -18,7 +20,7 @@ class MahasiswaController extends Controller
         //
         $mahasiswa = $mahasiswa = DB::table('mahasiswa')->get();
         $posts = Mahasiswa::orderBy('nim', 'desc')->paginate(6);
-        return view('mahasiswa.index', compact('posts'));
+        return view('mahasiswa.index', compact('mahasiswa'));
         with('i', (request()->input('page', 1) - 1) * 5);
     }
 
@@ -64,7 +66,7 @@ class MahasiswaController extends Controller
     public function show(Mahasiswa $mahasiswa)
     {
         //
-        $mahasiswa = Mahasiswa::find($mahasiswa->id);
+        // $mahasiswa = Mahasiswa::find($mahasiswa->nim);
         return view('mahasiswa.detail', compact('mahasiswa'));
     }
 
@@ -77,7 +79,7 @@ class MahasiswaController extends Controller
     public function edit(Mahasiswa $mahasiswa)
     {
         //
-        $mahasiswa = DB::table('mahasiswa')->where('id', $mahasiswa->id)->first();
+        $mahasiswa = DB::table('mahasiswa')->where('nim', $mahasiswa->nim)->first();
         return view('mahasiswa.edit', compact('mahasiswa'));
     }
 
@@ -98,7 +100,7 @@ class MahasiswaController extends Controller
             'jurusan' => 'required',
         ]);
 
-        Mahasiswa::find($mahasiswa->id)->update($request->all());
+        Mahasiswa::find($mahasiswa->nim)->update($request->all());
 
         return redirect()->route('mahasiswa.index')
             ->with('success', 'Mahasiswa Berhasil Diupdate');
@@ -113,7 +115,7 @@ class MahasiswaController extends Controller
     public function destroy(Mahasiswa $mahasiswa)
     {
         //
-        Mahasiswa::find($mahasiswa->id)->delete();
+        Mahasiswa::find($mahasiswa->nim)->delete();
 
         return redirect()->route('mahasiswa.index')
             ->with('success', 'Mahasiswa Berhasil Dihapus');

@@ -11,6 +11,7 @@
             <div class="card-body">
                 @if ($errors->any())
                 <div class="alert alert-danger">
+                    <strong>Whoops!</strong>There were some problems with your input. <br><br>
                     <ul>
                         @foreach ($errors->all() as $error)
                         <li>{{ $error }}</li>
@@ -18,7 +19,7 @@
                     </ul>
                 </div>
                 @endif
-                <form method="POST" action="{{ route('mahasiswa.store') }}" id="myForm">
+                <form method="POST" action="{{ route('mahasiswa.store') }}">
                     @csrf
                     <div class="form-group">
                         <label for="nim">Nim</label>
