@@ -19,9 +19,11 @@ class MahasiswaController extends Controller
     public function index()
     {
         //
+        // $mahasiswa = Mahasiswa::orderBy('id_mahasiswa', 'desc')->paginate(3);
+        // return view('mahasiswa.index', compact('mahasiswa'));
         $mahasiswa = $mahasiswa = DB::table('mahasiswa')->get();//Mengambil semua isi tabel
-        $posts = Mahasiswa::orderBy('Nim','desc')->paginate(6);
-        return view('mahasiswa.index',compact('mahasiswa'));
+        $posts = Mahasiswa::orderBy('nim','desc')->paginate(6);
+        return view('mahasiswa.index', compact('mahasiswa'))->
         with('i', (request()->input('page', 1) - 1) * 5);
     }
 
@@ -42,7 +44,7 @@ class MahasiswaController extends Controller
      * @param  \App\Http\Requests\StoreMahasiswaRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreMahasiswaRequest $request)
+    public function store(Request $request)
     {
         //melakukan validasi data
         $request->validate([
@@ -52,7 +54,9 @@ class MahasiswaController extends Controller
             'jurusan' =>'required',
         ]);
         //fungsi eloquent untuk menambah data
+        //$mahasiswa = Mahasiswa::create($request->all());
         Mahasiswa::create($request->all());
+        //$mahasiswa->save();
 
         //jika data berhasil ditambahkan, akan kembali ke halaman utama
         return redirect()->route('mahasiswa.index')
@@ -65,10 +69,11 @@ class MahasiswaController extends Controller
      * @param  \App\Models\Mahasiswa  $mahasiswa
      * @return \Illuminate\Http\Response
      */
-    public function show(Mahasiswa $mahasiswa)
+    public function show(Mahasiswa $nim)
     {
         //menampilkan detail data dengan menemukan/berdasarkan Mahasiswa
-        $Mahasiswa = Mahasiswa::find($mahasiswa);
+        $Mahasiswa = Mahasiswa::find($nim);
+        //$Mahasiswa=$mahasiswa;
         return view('mahasiswa.detail',compact('Mahasiswa'));
     }
 
@@ -78,10 +83,11 @@ class MahasiswaController extends Controller
      * @param  \App\Models\Mahasiswa  $mahasiswa
      * @return \Illuminate\Http\Response
      */
-    public function edit(Mahasiswa $mahasiswa)
+    public function edit(Mahasiswa $nim)
     {
         //menampilkan detail data dengan menemukan berdasarkan nama Mahasiswa untuk diedit
-        $Mahasiswa = DB::table('mahasiswa')->where('nim',$mahasiswa)->first();;
+        $Mahasiswa = DB::table('mahasiswa')->where('nim',$nim)->first();;
+       // $Mahasiswa=$mahasiswa;
         return view('mahasiswa.edit',compact('Mahasiswa'));
     }
 
@@ -92,7 +98,7 @@ class MahasiswaController extends Controller
      * @param  \App\Models\Mahasiswa  $mahasiswa
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateMahasiswaRequest $request, Mahasiswa $mahasiswa)
+    public function update(Request $request, $nim)
     {
         //melakukan validasi data
         $request->validate([
@@ -102,7 +108,8 @@ class MahasiswaController extends Controller
             'jurusan'=>'required',
         ]);
         //fungsi eloquent untuk mengupdate data inputan kita
-        Mahasiswa::find($mahasiswa)->update($request->all());
+        Mahasiswa::find($nim)->update($request->all());
+        //Mahasiswa::where('nim','$nim')->update();
         //jika data berhasil diupdate, akan kembali ke halaman utama
         return redirect()->route('mahasiswa.index')
         ->with('success','Mahasiswa Berhasil Diupdate');
@@ -114,10 +121,11 @@ class MahasiswaController extends Controller
      * @param  \App\Models\Mahasiswa  $mahasiswa
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Mahasiswa $mahasiswa)
+    public function destroy($nim)
     {
         //fungsi eloquent untuk menghapus data
-        Mahasiswa::find($mahasiswa)->delete();
+        //Mahasiswa::find($nim)->delete();
+        $Mahasiswa=DB::table('mahasiswa')->where('nim',$nim)->first();
         return redirect()->route('mahasiswa.index')
         ->with('success','Mahasiswa Berhasil Dihapus');
     }
