@@ -20,7 +20,15 @@
             <td>{{ $mhs -> kelas ?? ''}}</td>
             <td>{{ $mhs -> jurusan ?? ''}}</td>
             <td>
-                <a href="#" class="badge bg-primary"></a>
+                <a href="{{ route('mahasiswa.show', $mhs -> id_mahasiswa) }}" class="badge bg-primary">Show</a>
+                <a href="{{ route('mahasiswa.edit', $mhs -> id_mahasiswa) }}" class="badge bg-warning">Edit</a>
+                <a href="#"
+                class="badge bg-danger"
+                onclick="event.preventDefault(); document.getElementById('form-destroy-{{ $mhs->id_mahasiswa }}').submit()">Delete</a>
+                <form action="{{ route('mahasiswa.delete', $mhs -> id_mahasiswa) }}" method="post">
+                    @csrf
+                    @method('DELETE')
+                </form>
             </td>
         </tr>
         @endforeach
