@@ -116,3 +116,4 @@ class MahasiswaTest extends TestCase
         $response->assertStatus(200);
     }
 }
+

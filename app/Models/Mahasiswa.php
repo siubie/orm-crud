@@ -24,3 +24,4 @@ class Mahasiswa extends Model   //Definisi Model
         'jurusan',
     ];
 };
+

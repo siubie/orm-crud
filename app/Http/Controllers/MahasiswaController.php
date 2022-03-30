@@ -123,3 +123,4 @@ class MahasiswaController extends Controller
         -> with('success', 'Mahasiswa Berhasil Dihapus');
     }
 };
+
