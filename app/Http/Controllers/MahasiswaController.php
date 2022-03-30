@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Mahasiswa;
+use Illuminate\Http\Request;
 use App\Http\Requests\StoreMahasiswaRequest;
 use App\Http\Requests\UpdateMahasiswaRequest;
+use Illuminate\Support\Facades\DB;
 
 class MahasiswaController extends Controller
 {
@@ -15,7 +17,11 @@ class MahasiswaController extends Controller
      */
     public function index()
     {
-        //
+        // Fungsi eloquent menampilkan data menggunakan pagination
+        $mahasiswa = $mahasiswa = DB::table('mahasiswa')->get(); // Mengambil semua isi tabel
+        $posts = Mahasiswa::orderBy('Nim', 'desc')->paginate(6);
+        return view('mahasiswa.index', compact('mahasiswa'))
+        ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
     /**
@@ -26,6 +32,7 @@ class MahasiswaController extends Controller
     public function create()
     {
         //
+        return view('mahasiswa.create');
     }
 
     /**
@@ -36,7 +43,20 @@ class MahasiswaController extends Controller
      */
     public function store(StoreMahasiswaRequest $request)
     {
-        //
+        // Melakukan validasi data
+        $request->validate([
+            'nim' => 'required',
+            'nama' => 'required',
+            'kelas' => 'required',
+            'jurusan' => 'required',
+        ]);
+
+        // Fungsi eloquent untuk menambah data
+        Mahasiswa::create($request->all());
+
+        // Jika data berhasil ditambahkan, akan kembali ke halaman utama
+        return redirect()->route('mahasiswa.index')
+        ->with('success', 'Mahasiswa Berhasil Ditambahkan');
     }
 
     /**
@@ -45,9 +65,11 @@ class MahasiswaController extends Controller
      * @param  \App\Models\Mahasiswa  $mahasiswa
      * @return \Illuminate\Http\Response
      */
-    public function show(Mahasiswa $mahasiswa)
+    public function show(Mahasiswa $Nim)
     {
-        //
+        // Menampilkan detail data dengan menemukan/berdasarkan Nim Mahasiswa
+        $Mahasiswa = Mahasiswa::find($Nim);
+        return view('mahasiswa.detail', compact('Mahasiswa'));
     }
 
     /**
@@ -58,7 +80,9 @@ class MahasiswaController extends Controller
      */
     public function edit(Mahasiswa $mahasiswa)
     {
-        //
+        // Menampilkan detail data dengan menemukan berdasarkan Nim Mahasiswa untuk diedit
+        $Mahasiswa = DB::table('mahasiswa')->where('id_mahasiswa', $mahasiswa->id_mahasiswa)->first();
+        return view('mahasiswa.edit', compact('Mahasiswa'));
     }
 
     /**
@@ -70,7 +94,20 @@ class MahasiswaController extends Controller
      */
     public function update(UpdateMahasiswaRequest $request, Mahasiswa $mahasiswa)
     {
-        //
+        // Melakukan validasi data
+        $request->validate([
+            'nim' => 'required',
+            'nama' => 'required',
+            'kelas' => 'required',
+            'jurusan' => 'required',
+        ]);
+
+        // Fungsi eloquent untuk mengupdate data inputan kita
+        Mahasiswa::find($mahasiswa->id_mahasiswa)->update($request->all());
+
+        // Jika data berhasil diupdate, akan kembali ke halaman utama
+        return redirect()->route('mahasiswa.index')
+        ->with('success', 'Mahasiswa Berhasil Diupdate');
     }
 
     /**
@@ -81,6 +118,9 @@ class MahasiswaController extends Controller
      */
     public function destroy(Mahasiswa $mahasiswa)
     {
-        //
+        // Fungsi eloquent untuk menghapus data
+        Mahasiswa::find($mahasiswa->id_mahasiswa)->delete();
+        return redirect()->route('mahasiswa.index')
+        ->with('success', 'Mahasiswa Berhasil Dihapus');
     }
 }
