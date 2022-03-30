@@ -83,6 +83,7 @@ class MahasiswaTest extends TestCase
             'jurusan' => 'gamers',
         ]);
         $response->assertRedirect('/mahasiswa');
+        $response = $this->get('/mahasiswa');
         $response->assertSeeText('1234567');
         $response->assertSeeText('alexander the what ?');
         $response->assertSeeText('teutonic');
@@ -115,3 +116,4 @@ class MahasiswaTest extends TestCase
         $response->assertStatus(200);
     }
 }
+
