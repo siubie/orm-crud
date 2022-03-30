@@ -54,7 +54,8 @@ class MahasiswaController extends Controller
     {
         //
 
-        return view('mahasiswa.show', compact('mahasiswa'));
+        $Mahasiswa = $mahasiswa;
+        return view('mahasiswa.detail', compact('Mahasiswa'));
     }
 
     /**
@@ -66,8 +67,8 @@ class MahasiswaController extends Controller
     public function edit(Mahasiswa $mahasiswa)
     {
         //
-
-        return view('mahasiswa.edit', compact('mahasiswa'));
+        $Mahasiswa= $mahasiswa;
+        return view('mahasiswa.edit', compact('Mahasiswa'));
     }
 
     /**
