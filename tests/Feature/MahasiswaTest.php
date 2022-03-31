@@ -25,6 +25,9 @@ class MahasiswaTest extends TestCase
         $response->assertSeeText("Nama");
         $response->assertSeeText("Kelas");
         $response->assertSeeText("Jurusan");
+        $response->assertSeeText("E-mail");
+        $response->assertSeeText("Alamat");
+        $response->assertSeeText("TanggalLahir");
         $response->assertSeeText("Input Mahasiswa");
     }
 
@@ -46,6 +49,10 @@ class MahasiswaTest extends TestCase
             'nama' => 'alexander the what ?',
             'kelas' => 'teutonic',
             'jurusan' => 'gamers',
+            'e-mail' => 'meilinaanggraeniputri@gmail.com',
+            'alamat' => 'tuban',
+            'tanggal_lahir' => '23 mei 2002',
+
         ]);
         $response = $this->get("/mahasiswa");
         $response->assertStatus(200);
@@ -64,6 +71,9 @@ class MahasiswaTest extends TestCase
         $response->assertSeeText("Nama");
         $response->assertSeeText("Kelas");
         $response->assertSeeText("Jurusan");
+        $response->assertSeeText("E-mail");
+        $response->assertSeeText("Alamat");
+        $response->assertSeeText("TanggalLahir");
     }
 
     public function test_user_bisa_tambah_mahasiswa()
@@ -76,17 +86,27 @@ class MahasiswaTest extends TestCase
         $response->assertSeeText("Nama");
         $response->assertSeeText("Kelas");
         $response->assertSeeText("Jurusan");
+        $response->assertSeeText("E-mail");
+        $response->assertSeeText("Alamat");
+        $response->assertSeeText("TanggalLahir");
         $response = $this->post('mahasiswa', [
             'nim' => '1234567',
             'nama' => 'alexander the what ?',
             'kelas' => 'teutonic',
             'jurusan' => 'gamers',
+            'e-mail' => 'meilinaanggraeniputri@gmail.com',
+            'alamat' => 'tuban',
+            'tanggal_lahir' => '23 mei 2002',
         ]);
         $response->assertRedirect('/mahasiswa');
+        $response = $this->get('/mahasiswa');
         $response->assertSeeText('1234567');
         $response->assertSeeText('alexander the what ?');
         $response->assertSeeText('teutonic');
         $response->assertSeeText('gamers');
+        $response->assertSeeText('meilinaanggraeniputri@gmail.com');
+        $response->assertSeeText('tuban');
+        $response->assertSeeText('23 mei 2002');
     }
 
     public function test_user_bisa_buka_halaman_edit_mahasiswa()
@@ -97,8 +117,11 @@ class MahasiswaTest extends TestCase
             'nama' => 'alexander the what ?',
             'kelas' => 'teutonic',
             'jurusan' => 'gamers',
+            'e-mail' => 'meilinaanggraeniputri@gmail.com',
+            'alamat' => 'tuban',
+            'tanggal_lahir' => '23 mei 2002',
         ]);
-        $response = $this->get("/mahasiswa/{$mahasiswa->id}/edit");
+        $response = $this->get("/mahasiswa/{$mahasiswa->id_mahasiswa}/edit");
         $response->assertStatus(200);
     }
 
@@ -110,8 +133,12 @@ class MahasiswaTest extends TestCase
             'nama' => 'alexander the what ?',
             'kelas' => 'teutonic',
             'jurusan' => 'gamers',
+            'e-mail' => 'meilinaanggraeniputri@gmail.com',
+            'alamat' => 'tuban',
+            'tanggal_lahir' => '23 mei 2002',
+
         ]);
-        $response = $this->get("/mahasiswa/{$mahasiswa->id}");
+        $response = $this->get("/mahasiswa/{$mahasiswa->id_mahasiswa}");
         $response->assertStatus(200);
     }
 }
