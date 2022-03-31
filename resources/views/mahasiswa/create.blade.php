@@ -38,6 +38,18 @@
 <label for="Jurusan">Jurusan</label>
 <input type="Jurusan" name="jurusan" class="form-control" id="Jurusan" aria-describedby="Jurusan" >
 </div>
+<div class="form-group">
+    <label for="E_mail">Email</label>
+    <input type="E_mail" name="e_mail" class="form-control" id="E_mail" aria-describedby="E_mail" >
+    </div>
+ <div class="form-group">
+        <label for="Alamat">Alamat</label>
+        <input type="text" name="alamat" class="form-control" id="Alamat" aria-describedby="Alamat" >
+        </div>
+ <div class="form-group">
+            <label for="TanggalLahir">Tanggal Lahir</label>
+            <input type="date" name="tanggal_lahir" class="form-control" id="TanggalLahir" aria-describedby="TanggalLahir" >
+            </div>
 <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 </div>

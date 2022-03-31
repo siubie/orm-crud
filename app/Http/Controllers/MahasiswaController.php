@@ -16,8 +16,8 @@ class MahasiswaController extends Controller
  {
  //fungsi eloquent menampilkan data menggunakan pagination
  $mahasiswa = $mahasiswa = DB::table('mahasiswa')->get(); // Mengambil semua isi tabel
- $posts = Mahasiswa::orderBy('Nim', 'desc')->paginate(6);
- return view('mahasiswa.index', compact('mahasiswa'))
+ $posts = Mahasiswa::orderBy('Nim', 'desc')->paginate(3);
+ return view('mahasiswa.index', compact('posts'))
  ->with('i', (request()->input('page', 1) - 1) * 5);
  }
  public function create()
@@ -33,6 +33,9 @@ class MahasiswaController extends Controller
  'nama' => 'required',
  'kelas' => 'required',
  'jurusan' => 'required',
+ 'e_mail'=>'required',
+ 'alamat'=>'required',
+ 'tanggal_lahir'=>'required',
  ]);
 
  //fungsi eloquent untuk menambah data
@@ -67,6 +70,9 @@ $Mahasiswa = $mahasiswa;
  'nama' => 'required',
  'kelas' => 'required',
  'jurusan' => 'required',
+ 'e_mail'=>'required',
+ 'alamat'=>'required',
+ 'tanggal_lahir'=>'required',
  ]);
 
 //fungsi eloquent untuk mengupdate data inputan kita

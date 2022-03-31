@@ -38,6 +38,18 @@
         <label for="jurusan">Jurusan</label>
         <input type="text" name="jurusan" class="form-control" id="jurusan" value="{{ $Mahasiswa->jurusan }}" aria-describedby="jurusan" >
         </div>
+        <div class="form-group">
+            <label for="e_mail">E-mail</label>
+            <input type="text" name="e_mail" class="form-control" id="e_mail" value="{{ $Mahasiswa->e_mail }}" aria-describedby="e_mail" >
+            </div>
+         <div class="form-group">
+                <label for="alamat">Alamat</label>
+                <input type="text" name="alamat" class="form-control" id="alamat" value="{{ $Mahasiswa->alamat }}" aria-describedby="alamat" >
+                </div>
+        <div class="form-group">
+                 <label for="tanggal_lahir">Tanggal Lahir</label>
+                 <input type="date" name="tanggal_lahir" class="form-control" id="tanggal_lahir" value="{{ $Mahasiswa->tanggallahir }}" aria-describedby="tanggal_lahir" >
+                 </div>
         <button type="submit" class="btn btn-primary">Submit</button>
         </form>
         </div>
