@@ -59,6 +59,13 @@ class MahasiswaController extends Controller
         return view('mahasiswa.detail', compact('Mahasiswa'));
     }
 
+    public function search(Request $request)
+    {
+        $search = $request->get('search');
+        $mahasiswa = DB::table('mahasiswa')->where('nama', 'like', '%'.$search.'%')->paginate(3);
+        return view('mahasiswa.index', ['mahasiswa' => $mahasiswa]);
+    }
+
     /**
      * Show the form for editing the specified resource.
      *

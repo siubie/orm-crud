@@ -1,15 +1,18 @@
 @extends('mahasiswa.layout')
 @section('content')
-    <div class="row">
-        <div class="col-lg-12 margin-tb">
-            <div class="pull-left mt-2">
-                <h2>JURUSAN TEKNOLOGI INFORMASI-POLITEKNIK NEGERI MALANG</h2>
-            </div>
-            <div class="float-right my-2">
-                <a class="btn btn-success" href="{{ route('mahasiswa.create') }}"> Input Mahasiswa</a>
-            </div>
+<div class="row">
+    <div class="col-lg-12 margin-tb">
+        <div class="pull-left mt-2">
+            <h2>JURUSAN TEKNOLOGI INFORMASI-POLITEKNIK NEGERI MALANG</h2>
+        </div>
+        <div class="float-right my-2">
+            <a class="btn btn-success" href="{{ route('mahasiswa.create') }}"> Input Mahasiswa</a>
         </div>
     </div>
+    <form action=/search method="GET" class="col-12 col-lg-auto mb-2 mb-lg-0 me-lg-auto">
+        <input type="search" name="search" class="form-control" placeholder="Search..." aria-label="Search">
+    </form>
+</div>
     @if ($message = Session::get('success'))
         <div class="alert alert-success">
             <p>{{ $message }}</p>
