@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\MahasiswaController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,4 +20,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('/mahasiswa', MahasiswaController::class);
+Route::get('/search', [MahasiswaController::class, 'search']);
+
+Route::resource('mahasiswa', MahasiswaController::class);

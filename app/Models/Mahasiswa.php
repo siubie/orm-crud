@@ -2,13 +2,15 @@
 
 namespace App\Models;
 
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\Mahasiswa as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Model;
 
 class Mahasiswa extends Model
 {
-    use HasFactory;
-    protected $table = "Mahasiswa";
+    protected $table = "mahasiswa";
     protected $primaryKey = "id_mahasiswa";
 
     protected $fillable = [
@@ -16,5 +18,8 @@ class Mahasiswa extends Model
         'nama',
         'kelas',
         'jurusan',
+        'email',
+        'alamat',
+        'tgl_lahir',
     ];
 }
