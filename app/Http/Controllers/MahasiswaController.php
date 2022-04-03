@@ -49,9 +49,9 @@ class MahasiswaController extends Controller
      * @param  \App\Models\Mahasiswa  $mahasiswa
      * @return \Illuminate\Http\Response
      */
-    public function show(Mahasiswa $mahasiswa)
+    public function show($mahasiswa)
     {
-        $Mahasiswa = $mahasiswa;
+        $Mahasiswa = Mahasiswa::where('nim',$mahasiswa)->first();
         return view('mahasiswa.detail', compact('Mahasiswa'));
     }
 
@@ -61,9 +61,9 @@ class MahasiswaController extends Controller
      * @param  \App\Models\Mahasiswa  $mahasiswa
      * @return \Illuminate\Http\Response
      */
-    public function edit(Mahasiswa $mahasiswa)
+    public function edit($mahasiswa)
     {
-        $Mahasiswa = $mahasiswa;
+        $Mahasiswa = Mahasiswa::where('nim', $mahasiswa)->first();
         return view('mahasiswa.edit', compact('Mahasiswa'));
     }
 
@@ -83,7 +83,12 @@ class MahasiswaController extends Controller
             'jurusan'   => 'required',
         ]);
 
-        Mahasiswa::where('nim', $Nim)->update();
+        Mahasiswa::where('nim', $Nim)->update($request->validate([
+            'nim'       => 'required',
+            'nama'      => 'required',
+            'kelas'     => 'required',
+            'jurusan'   => 'required',
+        ]));
 
         return redirect()->route('mahasiswa.index')->
         with('success', 'Mahasiswa Berhasil Diupdate');
@@ -97,7 +102,7 @@ class MahasiswaController extends Controller
      */
     public function destroy($Nim)
     {
-        $Mahasiswa = DB::table('mahasiswa')->where('nim', $Nim)->first();
+        $Mahasiswa = Mahasiswa::where('nim', $Nim)->first()->delete();
         return redirect()->route('mahasiswa.index')
         ->with('success', 'Mahasiswa Berhasil Dihapus');
     }
