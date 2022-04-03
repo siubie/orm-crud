@@ -7,6 +7,7 @@ use App\Http\Requests\StoreMahasiswaRequest;
 use App\Http\Requests\UpdateMahasiswaRequest;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Model;
 
 class MahasiswaController extends Controller
 {
@@ -19,7 +20,7 @@ class MahasiswaController extends Controller
     {
         //fungsi eloquent menampilkan data menggunakan pagination
         $mahasiswa = $mahasiswa = DB::table('mahasiswa')->get(); // Mengambil semua isi tabel
-        $posts = Mahasiswa::orderBy('Nim', 'desc')->paginate(6);
+        $mahasiswa = Mahasiswa::orderBy('created_at', 'desc')->paginate(3);
         return view('mahasiswa.index', compact('mahasiswa'))
         ->with('i', (request()->input('page', 1) - 1) * 5);
     }
@@ -35,6 +36,9 @@ class MahasiswaController extends Controller
             'nama' => 'required',
             'kelas' => 'required',
             'jurusan' => 'required',
+            'email'     => 'required',
+            'alamat'    => 'required',
+            'tgl_lahir' => 'required',
         ]);
 
         Mahasiswa::create($request->all());
@@ -81,6 +85,9 @@ class MahasiswaController extends Controller
             'nama'      => 'required',
             'kelas'     => 'required',
             'jurusan'   => 'required',
+            'email'     => 'required',
+            'alamat'    => 'required',
+            'tgl_lahir' => 'required',
         ]);
 
         Mahasiswa::where('nim', $Nim)->update($request->validate([
@@ -88,6 +95,9 @@ class MahasiswaController extends Controller
             'nama'      => 'required',
             'kelas'     => 'required',
             'jurusan'   => 'required',
+            'email'     => 'required',
+            'alamat'    => 'required',
+            'tgl_lahir' => 'required',
         ]));
 
         return redirect()->route('mahasiswa.index')->
