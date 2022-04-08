@@ -31,8 +31,11 @@ class MahasiswaController extends Controller
         $mahasiswa = $request->validate([
             'nim' => 'required',
             'nama' => 'required',
+            'email' => 'required',
+            'tanggalLahir' => 'required',
             'kelas' => 'required',
             'jurusan' => 'required',
+            'alamat' => 'required',
         ]);
 
         //fungsi eloquent untuk menambah data
@@ -62,8 +65,11 @@ class MahasiswaController extends Controller
         $validasi = $request->validate([
             'nim' => 'required',
             'nama' => 'required',
+            'email' => 'required',
+            'tanggalLahir' => 'required',
             'kelas' => 'required',
             'jurusan' => 'required',
+            'alamat' => 'required',
         ]);
 
         //fungsi eloquent untuk mengupdate data inputan kita

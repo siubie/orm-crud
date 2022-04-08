@@ -11,8 +11,17 @@
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item"><b>Nim:</b>{{$Mahasiswa->nim}}</li>
                     <li class="list-group-item"><b>Nama:</b>{{$Mahasiswa->nama}}</li>
+                    <li class="list-group-item"><b>Email:</b>{{$Mahasiswa->email}}</li>
+                    <li class="list-group-item">
+                        <b>Tanggal Lahir:</b>
+                        @php
+                            $date = date_create($Mahasiswa->tanggalLahir);
+                            echo date_format($date, "d F Y");
+                        @endphp
+                    </li>
                     <li class="list-group-item"><b>Kelas:</b>{{$Mahasiswa->kelas}}</li>
                     <li class="list-group-item"><b>Jurusan:</b>{{$Mahasiswa->jurusan}}</li>
+                    <li class="list-group-item"><b>Alamat:</b>{{$Mahasiswa->alamat}}</li>
                 </ul>
             </div>
             <a class="btn btn-success mt-3" href="{{ route('mahasiswa.index') }}">Kembali</a>

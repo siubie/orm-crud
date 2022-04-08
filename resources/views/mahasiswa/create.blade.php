@@ -29,12 +29,24 @@
                         <input type="Nama" name="nama" class="form-control" id="Nama" aria-describedby="Nama" >
                     </div>
                     <div class="form-group">
+                        <label for="Nama">Email</label>
+                        <input type="email" name="email" class="form-control" id="Email" aria-describedby="Email" >
+                    </div>
+                    <div class="form-group">
+                        <label for="Nama">Tanggal Lahir</label>
+                        <input type="date" name="tanggalLahir" class="form-control" id="TanggalLahir" aria-describedby="TanggalLahir" >
+                    </div>
+                    <div class="form-group">
                         <label for="Kelas">Kelas</label>
                         <input type="Kelas" name="kelas" class="form-control" id="Kelas" aria-describedby="password" >
                     </div>
                     <div class="form-group">
                         <label for="Jurusan">Jurusan</label>
                         <input type="Jurusan" name="jurusan" class="form-control" id="Jurusan" aria-describedby="Jurusan" >
+                    </div>
+                    <div class="form-group">
+                        <label for="Jurusan">Alamat</label>
+                        <input type="text" name="alamat" class="form-control" id="Alamat" aria-describedby="Alamat" >
                     </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>

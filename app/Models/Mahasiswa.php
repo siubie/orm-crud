@@ -15,9 +15,12 @@ protected $primaryKey = 'id_mahasiswa'; // Memanggil isi DB Dengan primarykey
 @var array
 */
 protected $fillable = [
-'nim',
-'nama',
-'kelas',
-'jurusan',
-];
+                        'nim',
+                        'nama',
+                        'email',
+                        'tanggalLahir',
+                        'kelas',
+                        'jurusan',
+                        'alamat',
+                      ];
 };

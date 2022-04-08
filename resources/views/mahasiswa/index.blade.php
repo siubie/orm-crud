@@ -20,16 +20,27 @@
         <tr>
             <th>Nim</th>
             <th>Nama</th>
+            <th>Email</th>
+            <th>Tanggal Lahir</th>
             <th>Kelas</th>
             <th>Jurusan</th>
+            <th>Alamat</th>
             <th width="280px">Action</th>
         </tr>
         @foreach ($mahasiswa as $mhs)
             <tr>
                 <td>{{ $mhs ->nim }}</td>
                 <td>{{ $mhs ->nama }}</td>
+                <td>{{ $mhs ->email }}</td>
+                <td>
+                    @php
+                        $date = date_create($mhs->tanggalLahir);
+                        echo date_format($date, "d F Y");
+                    @endphp
+                </td>
                 <td>{{ $mhs ->kelas }}</td>
                 <td>{{ $mhs ->jurusan }}</td>
+                <td>{{ $mhs ->alamat }}</td>
                 <td>
                     <form action="{{ route('mahasiswa.destroy',['mahasiswa'=>$mhs->nim]) }}" method="POST">
                         <a class="btn btn-info" href="{{ route('mahasiswa.show',$mhs->nim) }}">Show</a>
