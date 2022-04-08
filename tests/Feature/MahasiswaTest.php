@@ -68,7 +68,7 @@ class MahasiswaTest extends TestCase
 
     public function test_user_bisa_tambah_mahasiswa()
     {
-        $this->seed();
+   $this->seed();
         $response = $this->get("/mahasiswa/create");
         $response->assertStatus(200);
         $response->assertSeeText("Tambah Mahasiswa");
@@ -99,7 +99,7 @@ class MahasiswaTest extends TestCase
             'kelas' => 'teutonic',
             'jurusan' => 'gamers',
         ]);
-        $response = $this->get("/mahasiswa/{$mahasiswa->id_mahasiswa}/edit");
+        $response = $this->get("/mahasiswa/{$mahasiswa->nim}/edit");
         $response->assertStatus(200);
     }
 
@@ -112,7 +112,7 @@ class MahasiswaTest extends TestCase
             'kelas' => 'teutonic',
             'jurusan' => 'gamers',
         ]);
-        $response = $this->get("/mahasiswa/{$mahasiswa->id_mahasiswa}");
+        $response = $this->get("/mahasiswa/{$mahasiswa->id}");
         $response->assertStatus(200);
     }
 }
