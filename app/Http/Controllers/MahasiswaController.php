@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests\StoreMahasiswaRequest;
 use App\Http\Requests\UpdateMahasiswaRequest;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Routing\Controller;
+
 class MahasiswaController extends Controller
 {
     /**
@@ -87,5 +89,11 @@ class MahasiswaController extends Controller
         Mahasiswa::where('nim',$Nim)->delete();
         return redirect()->route('mahasiswa.index')
         -> with('success', 'Mahasiswa Berhasil Dihapus');
+    }
+    public function search(Request $request)
+    {
+        $search = $request->get('search');
+        $mahasiswa = Mahasiswa::where('nama', 'like', '%' . $search . '%')->simplePaginate(3);
+        return view('mahasiswa.index', compact('mahasiswa'));
     }
 };

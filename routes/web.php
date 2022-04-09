@@ -1,8 +1,9 @@
 <?php
 
-use App\Http\Controllers\MahasiswaController;
-use Illuminate\Support\Facades\Route;
+use App\Models\Mahasiswa;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MahasiswaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,3 +21,4 @@ Route::get('/', function () {
 });
 
 Route::resource('/mahasiswa', MahasiswaController::class);
+Route::get('/search', MahasiswaController::class . '@search');
